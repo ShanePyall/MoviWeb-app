@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add movie</title>
+</head>
+<body>
+<h1>Search and add a new movie</h1>
+<div>
+    <form action="/users/{{ user_id }}/add_movie" method="POST">
+        <input name="title" placeholder="Search a movie title">
+    </form>
+    <br>
+    <form action="/users/{{ user_id }}" method="GET">
+      <input type="submit" value="Cancel back to your movie list">
+  </form>
+</div>
+</body>
+</html>

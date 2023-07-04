@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User deletion page</title>
+</head>
+<body>
+  <h1>Would you like to delete this user?</h1>
+<p>Movies:
+  <ul>{% for item in user['storage'] %}
+      <p>
+      <strong>Title:</strong> {{ item['title'] }}<br>
+      <strong>Rated:</strong> {{ item['rating'] }}<br>
+      <strong>Director:</strong> {{ item['director'] }}<br>
+      <strong>Year released:</strong> {{ item['year'] }}
+      </p>
+      {% endfor %}
+  </ul>
+  <form action="/users">
+      <input type="submit" value="Cancel back to home">
+  </form>
+  <br>
+  <form action="/delete_user/{{ user['id'] }}" method="POST">
+      <input type="submit" value="Yes, Delete this user">
+  </form>
+</body>
+</html>

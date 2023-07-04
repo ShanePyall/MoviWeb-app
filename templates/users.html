@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users - MovieWeb App</title>
+</head>
+<body>
+    <h1>All users</h1>
+    <div>
+        <form action="/add_user">
+            <button>Add user +</button>
+        </form>
+        <ul>{% for item in users %}
+                <a href="http://127.0.0.1:5000/users/{{ item['id']}}">
+                <strong>user name:</strong> {{ item['name'] }}
+                    <form action="/delete_user/{{ item['id'] }}">
+                    <input type="submit" value="Delete user">
+                    </form>
+                </a>
+            <br>
+            {% endfor %} <!-- Changing spelling results in TemplateSyntaxError -->
+        </ul>
+    </div>
+</body>
+</html>

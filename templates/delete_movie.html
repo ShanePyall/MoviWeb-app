@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Movie</title>
+</head>
+<body>
+    <h1>Delete this movie:</h1>
+<p>
+    "{{ movie['title'] }}"<br>
+    {{ movie['year'] }}<br>
+    Directed by: {{ movie['director'] }}<br>
+    Rated: {{ movie['rating'] }} / 10<br>
+</p>
+    <form action="/users/{{ user_id }}">
+      <input type="submit" value="Cancel back to your movie list">
+  </form>
+<form action="/users/{{ user_id }}/delete_movie/{{ movie['id'] }}" method="POST">
+    <input type="submit" name="{{ movie['id']}}" value="Delete(final chance)">
+</form>
+</body>
+</html>

@@ -1,0 +1,37 @@
+[
+  {
+    "id": 2,
+    "name": "updated",
+    "password": "666666",
+    "storage": [
+      {
+        "id": 0,
+        "title": "The Antman",
+        "director": "Christoph Gampl",
+        "Year": "2002",
+        "rating": "4.6/10",
+        "year": "555"
+      },
+      {
+        "id": 1,
+        "title": "Iron Man",
+        "director": "Jon Favreau",
+        "Year": "2008",
+        "rating": "7.9/10"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Merlin",
+    "storage": [
+      {
+        "id": 1,
+        "title": "Nobody",
+        "director": "Ilya Naishuller",
+        "year": "2021",
+        "rating": "7.4/10"
+      }
+    ]
+  }
+]
