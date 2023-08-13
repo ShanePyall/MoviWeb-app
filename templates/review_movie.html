@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie review form</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<h1 class="page-title">Leave a review</h1>
+<div class="user-list">
+    <form action="/users/{{ user['id'] }}">
+      <button class="add-button" type="submit">User movie list</button>
+    </form>
+</div>
+<ul class="movie-list">
+    <li class="movie-item">
+        <div class="movie-details">
+            <h2>"{{ movie['title'] }}"</h2>
+            <h3>directed by: {{ movie['director'] }}<br>
+                released in {{ movie['year'] }}<br>
+                rated: {{ movie['rating'] }}</h3>
+        </div>
+    </li>
+    <li class="movie-item">
+        <div class="movie-details">
+            <h3>Reviews: </h3>{% for review in movie['reviews'] %}
+            - {{ review }}<br>
+            {% endfor %}
+        </div>
+    </li>
+</ul>
+
+<div class="user-input-container">
+    <form action="/users/{{ user['id'] }}/review_movie/{{ movie['id'] }}" method="POST" class="user-input-form">
+        <p class="review-text">Seen it? Why not leave a review!</p>
+        <textarea name="review" placeholder="Enter your review (250 character limit)" class="review-input"></textarea>
+        <button type="submit" class="submit-button">Submit</button>
+    </form>
+</div>
+</body>
+</html>

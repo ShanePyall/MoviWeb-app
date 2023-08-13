@@ -1,0 +1,244 @@
+####    main    ########################
+
+.page-title {
+    text-align: center;
+    padding: 20px 0;
+    color: #333;
+}
+
+.user-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.add-form {
+    margin-bottom: 20px;
+}
+
+
+####    Add    #############################
+
+
+.add-button,
+.delete-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-button:hover,
+.delete-button:hover {
+    background-color: #2980b9;
+}
+
+
+####    user    ############################
+
+
+.user-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.user-card {
+    width: 250px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.user-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.user-name {
+    text-align:center;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.delete-user-form {
+    text-align: center;
+}
+
+
+####    movie   ########################
+
+
+ .movie-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.movie-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    padding: 20px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.movie-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.movie-details {
+    margin-bottom: 15px;
+}
+
+.movie-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+####    button      ###############################
+
+
+.edit-button,
+.review-button,
+.delete-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.edit-button:hover,
+.review-button:hover,
+.delete-button:hover {
+    background-color: #2980b9;
+}
+
+
+####    input       ###############################
+
+
+.user-input-container {
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-input-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.review-text {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.review-input {
+    align-items: center;
+    width: 60%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    resize: vertical;
+    max-width: 100%;
+    min-height: 10px;
+    margin-bottom: 15px;
+}
+
+.submit-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    max-width: 100px;
+    align-self: center;
+}
+
+.submit-button:hover {
+    background-color: #2980b9;
+}
+
+####    error       ###########################
+
+.error-message {
+    text-align: center;
+    width: 60%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    align-items: center;
+}
+
+
+####    home page       #######################
+
+
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Basic styling */
+.home-page {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+}
+
+.welcome-text {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background-color: #2980b9;
+}

@@ -3,19 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Update movie form</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-<h1>Updating movie</h1>
-<form action="/users/{{ user_id }}/update_movie/{{ movie['id'] }}" method="POST">
-    New movie title: <input name="title" placeholder="{{ movie['title'] }}">
-    New movie director: <input name="director" placeholder="{{ movie['director'] }}">
-    New movie year: <input name="year" placeholder="{{ movie['year'] }}">
-    New movie rating: <input name="rating" placeholder="{{ movie['rating'] }}">
-    <input type="submit">
-    <br><br>
-</form>
-<form action="/users/{{ user_id }}">
-      <input type="submit" value="Cancel back to your movie list">
-  </form>
+<h1 class="page-title">Updating movie</h1>
+<div class="user-list">
+    <form action="/users/{{ user['id'] }}">
+      <button class="add-button" type="submit">Cancel</button>
+    </form>
+</div>
+<ul class="movie-list">
+    <li class="movie-item">
+        <div class="movie-details">
+            <form action="/users/{{ user_id }}/update_movie/{{ movie['id'] }}" method="POST">
+                New movie title: <input name="title" placeholder="{{ movie['title'] }}"><br><br>
+                New movie director: <input name="director" placeholder="{{ movie['director'] }}"><br><br>
+                New movie year: <input name="year" placeholder="{{ movie['year'] }}"><br><br>
+                New movie rating: <input name="rating" placeholder="{{ movie['rating'] }}"><br><br>
+                <input class="submit-button" type="submit">
+            </form>
+        </div>
+    </li>
+</ul>
+
 </body>
 </html>

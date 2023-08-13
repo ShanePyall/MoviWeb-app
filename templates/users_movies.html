@@ -3,33 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ user['name'] }}'s movie list</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-  <h1>Movie list</h1>
-  <div>
-      <form action="/users/{{ user['id'] }}/add_movie">
-          <button>Add movie +</button>
+  <h1 class="page-title">{{ user['name'] }}s' movies</h1>
+  <div class="user-list">
+      <form action="/users/{{ user['id'] }}/add_movie" class="add-form">
+          <button class="add-button" type="submit">Add movie +</button>
       </form>
       <br>
-      <form action="/users">
-          <input type="submit" value="Return back to users list">
+      <form action="/users" class="add-form">
+          <button class="add-button" type="submit">User home page</button>
       </form>
   </div>
-  <ul>{% for item in movies %}
-      <p>
-        <strong>Title:</strong> {{ item['title'] }}<br>
-        <strong>Rated:</strong> {{ item['rating'] }}<br>
-        <strong>Director:</strong> {{ item['director'] }}<br>
-        <strong>Year released:</strong> {{ item['year'] }}
-
-        <form action="/users/{{ user['id'] }}/update_movie/{{ item['id'] }}">
-            <button>Edit</button>
-        </form>
-
-        <form action="/users/{{ user['id'] }}/delete_movie/{{ item['id'] }}">
-            <button>Delete</button><br><br><br>
-        </form>
-      {% endfor %} <!-- Changing spelling results in TemplateSyntaxError -->
-  </ul>
+  <ul class="movie-list">
+    {% for item in movies %}
+    <li class="movie-item" type="1">
+        <div class="movie-details">
+            <p>
+                <strong>Title:</strong> {{ item['title'] }}<br>
+                <strong>Rated:</strong> {{ item['rating'] }}<br>
+                <strong>Director:</strong> {{ item['director'] }}<br>
+                <strong>Year Released:</strong> {{ item['year'] }}<br>
+                <strong>Comments:</strong>
+                {% for review in item['reviews'] %}
+                <br>- {{ review }}
+                {% endfor %}
+            </p>
+            <div class="movie-actions">
+                <form action="/users/{{ user['id'] }}/update_movie/{{ item['id'] }}">
+                    <button class="edit-button">Edit</button>
+                </form>
+                <form action="/users/{{ user['id'] }}/review_movie/{{ item['id'] }}" method="GET">
+                    <button class="review-button">Review</button>
+                </form>
+                <form action="/users/{{ user['id'] }}/delete_movie/{{ item['id'] }}">
+                    <button style="background-color:red" class="delete-button">Delete</button>
+                </form>
+            </div>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
 </body>
 </html>

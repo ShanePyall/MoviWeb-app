@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Error {{ message[1] }}</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-<form action="/">
-    <button>Return to Home...</button>
-</form>
-    <p>
+<div class="user-list">
+    <form action="/users" class="add-form">
+        <button class="add-button" type="submit">User home page</button>
+    </form>
+</div>
+<div class="user-list">
+    <p class="error-message">
         {{ message[0] }}
     </p>
+</div>
 </body>
 </html>

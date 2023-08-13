@@ -1,8 +1,11 @@
-from flask import Flask, render_template, request
-from datamanager.json_data_manager import JSONDataManager
+from api import api
+from flask import render_template, request
+from datamanager.sql_data_manager import SQLDataManager
+from Models import User, Movie, Review
+from __inti__ import db, app
 
-app = Flask(__name__)
-data_manager = JSONDataManager('datamanager/user_list.json')
+app.register_blueprint(api, url_prefix='/api')
+data_manager = SQLDataManager(db=db, users_model=User, movies_model=Movie, reviews_model=Review)
 
 
 # On load: Displays home page, with option to view all users in database
@@ -22,6 +25,12 @@ def list_users():
 @app.route("/users/<int:user_id>", methods=['GET'])
 def user_movies(user_id):
     movies = data_manager.get_user_movies(user_id)
+    if movies is None:
+        movies = [{"title": "placeholder",
+                   "rating": "0/0",
+                   "director": "placeholder",
+                   "year": "0",
+                   "reviews": ["""I will go away after you add a movie"""]}]
     user_list = data_manager.get_all_users()
     user = [user for user in user_list if user['id'] == user_id]
     try:
@@ -37,6 +46,8 @@ def add_user():
     if request.method == 'GET':
         return render_template("add_user.html")
     username = request.form.get("username")
+    if len(username) > 15:
+        return render_template("error.html", message=("Please only enter a username with 15 characters or less", 500))
     user_list = data_manager.get_all_users()
     username_list = [user['name'] for user in user_list]
     if username in username_list:
@@ -66,14 +77,18 @@ def add_movie(user_id):
     if request.method == "GET":
         return render_template("add_movie.html", user_id=user_id)
     title = request.form.get("title")
+    if title == "":
+        return render_template("error.html", message=("No data was entered for new movie", 500))
     movie_list = data_manager.get_user_movies(user_id)
+    if movie_list is None:
+        movie_list = [{'title': None}]
     for movie in movie_list:
         if movie['title'] == title:
             return render_template("error.html", message=(f"Sorry, movie: \"{title}\" is already in your list", 409))
     message = data_manager.add_movie(user_id=user_id, title=title)
 
     if type(message) == tuple:
-        return render_template("error.html", message=message[0])
+        return render_template("error.html", message=message)
     return user_movies(user_id)
 
 
@@ -85,7 +100,8 @@ def update_movie(user_id, movie_id):
         target = [movie for movie in movie_list if movie['id'] == movie_id]
         try:
             movie = target[0]
-            return render_template("update_movie.html", movie=movie, user_id=user_id)
+            user = {"id": user_id}
+            return render_template("update_movie.html", movie=movie, user=user)
         except IndexError:
             return route_not_found()
 
@@ -105,12 +121,36 @@ def delete_movie(user_id, movie_id):
         movie_list = data_manager.get_user_movies(user_id)
         target = [movie for movie in movie_list if movie['id'] == movie_id]
         try:
-            movie = target[0]
-            return render_template("delete_movie.html", user_id=user_id, movie=movie)
+            users = data_manager.get_all_users()
+            user = [user for user in users if user['id'] == user_id]
+            return render_template("delete_movie.html", user=user[0], movie=target[0])
         except IndexError:
             return route_not_found()
     data_manager.delete_movie(user_id, movie_id)
     return render_template("home.html")
+
+
+# Adds a review to a movie in users list
+@app.route("/users/<int:user_id>/review_movie/<int:movie_id>", methods=['GET', 'POST'])
+def review_movie(user_id, movie_id):
+    if request.method == "GET":
+        movies = data_manager.get_user_movies(user_id)
+        movie = [movie for movie in movies if movie['id'] == movie_id]
+        users = data_manager.get_all_users()
+        user = [user for user in users if user['id'] == user_id]
+        return render_template("review_movie.html", movie=movie[0], user=user[0])
+
+    review = request.form.get('review')
+    if review is None or review == "":
+        return home()
+    if len(review) > 250:
+        return render_template("error.html",
+                               message=("""Too many characters,
+                                        please use 250 characters or less for your review""", 500))
+    data_manager.review_movie(user_id=user_id,
+                              movie_id=movie_id,
+                              review=review)
+    return home()
 
 
 # if route cannot be found, displays error html.
@@ -137,4 +177,5 @@ def id_not_found(e):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    with app.app_context():
+        app.run(debug=True)

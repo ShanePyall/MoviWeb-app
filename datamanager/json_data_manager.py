@@ -42,6 +42,7 @@ class JSONDataManager(DataManagerInterface):
             writable.write(json.dumps(user_list, indent=2))
         return
 
+    # Deletes a user with the appropriate id
     def delete_user(self, user_id):
         with open(self.filename, "r") as readable:
             user_list = json.loads(readable.read())

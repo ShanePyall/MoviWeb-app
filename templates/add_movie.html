@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Add movie</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-<h1>Search and add a new movie</h1>
-<div>
-    <form action="/users/{{ user_id }}/add_movie" method="POST">
-        <input name="title" placeholder="Search a movie title">
+<h1 class="page-title">Search and add a new movie</h1>
+<div class="user-list">
+    <form action="/users/{{ user_id }}">
+      <button class="add-button" type="submit">User movie list</button>
     </form>
-    <br>
-    <form action="/users/{{ user_id }}" method="GET">
-      <input type="submit" value="Cancel back to your movie list">
-  </form>
 </div>
+    <br>
+<div class="user-input-container">
+    <form action="/users/{{ user_id }}/add_movie" method="POST" class="user-input-form">
+        <textarea name="title" placeholder="Search a movie title"class="review-input"></textarea>
+        <button type="submit" class="submit-button">Submit</button>
+</form></div>
 </body>
 </html>
