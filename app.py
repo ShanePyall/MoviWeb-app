@@ -25,7 +25,7 @@ def list_users():
 @app.route("/users/<int:user_id>", methods=['GET'])
 def user_movies(user_id):
     movies = data_manager.get_user_movies(user_id)
-    if movies is None:
+    if movies is None or type(movies) is str:
         movies = [{"title": "placeholder",
                    "rating": "0/0",
                    "director": "placeholder",
@@ -46,8 +46,10 @@ def add_user():
     if request.method == 'GET':
         return render_template("add_user.html")
     username = request.form.get("username")
-    if len(username) > 15:
-        return render_template("error.html", message=("Please only enter a username with 15 characters or less", 500))
+    if len(username) > 15 or username == "":
+        return render_template("error.html", message=("""Please only enter a username with \
+        characters greater than 0 and less than 15""", 500))
+
     user_list = data_manager.get_all_users()
     username_list = [user['name'] for user in user_list]
     if username in username_list:
@@ -80,7 +82,7 @@ def add_movie(user_id):
     if title == "":
         return render_template("error.html", message=("No data was entered for new movie", 500))
     movie_list = data_manager.get_user_movies(user_id)
-    if movie_list is None:
+    if movie_list is None or type(movie_list) is str:
         movie_list = [{'title': None}]
     for movie in movie_list:
         if movie['title'] == title:
@@ -178,4 +180,5 @@ def id_not_found(e):
 
 if __name__ == '__main__':
     with app.app_context():
+        db.create_all()
         app.run(debug=True)

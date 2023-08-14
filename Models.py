@@ -1,4 +1,4 @@
-from __inti__ import db
+from __inti__ import db, app
 
 
 # Creates a list of users
@@ -27,3 +27,4 @@ class Review(db.Model):
     user_id = db.Column(db.Integer)  # Foreign key
     movie_id = db.Column(db.Integer)  # Foreign key
     review_details = db.Column(db.String(250))
+

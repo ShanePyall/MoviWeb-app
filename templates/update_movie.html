@@ -15,7 +15,7 @@
 <ul class="movie-list">
     <li class="movie-item">
         <div class="movie-details">
-            <form action="/users/{{ user_id }}/update_movie/{{ movie['id'] }}" method="POST">
+            <form action="/users/{{ user['id'] }}/update_movie/{{ movie['id'] }}" method="POST">
                 New movie title: <input name="title" placeholder="{{ movie['title'] }}"><br><br>
                 New movie director: <input name="director" placeholder="{{ movie['director'] }}"><br><br>
                 New movie year: <input name="year" placeholder="{{ movie['year'] }}"><br><br>
